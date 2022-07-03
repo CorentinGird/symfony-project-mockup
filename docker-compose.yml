@@ -1,20 +1,20 @@
-version: '3'
+version: '3.7'
 
 services:
     db:
         container_name: ${PROJECT_NAME}-db
-        image: mysql:8.0.27
+        image: mariadb:10.8
         volumes:
             - ./docker/.data/db:/var/lib/mysql
-            - ./docker/logs/mysql:/var/log/mysql
+            - ./docker/logs/mariadb:/var/log/mysql
         environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            DOMAIN_NAME: ${PROJECT_NAME}.mysql.local
+            MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+            MARIADB_DATABASE: ${MARIADB_DATABASE}
+            MARIADB_USER: ${MARIADB_USER}
+            MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+            DOMAIN_NAME: ${PROJECT_NAME}.MARIADB.local
         ports:
-            - ${MYSQL_PORT}:3306
+            - ${MARIADB_PORT}:3306
         networks:
             - local
 
@@ -30,7 +30,7 @@ services:
             - local
 
     nginx:
-        container_name: ${PROJECT_NAME}-nginx
+        container_name: ${PROJECT_NAME}
         build:
             context: docker/nginx
             args:
