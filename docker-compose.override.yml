@@ -1,6 +1,15 @@
-version: '3'
+version: '3.7'
 
 services:
+    mailhog:
+        container_name: ${PROJECT_NAME}-mailhog
+        image: mailhog/mailhog
+        networks:
+            - local
+        ports:
+            - "1025:1025"
+            - "8025:8025"
+
     blackfire:
         container_name: ${PROJECT_NAME}-blackfire
         image: blackfire/blackfire:2
